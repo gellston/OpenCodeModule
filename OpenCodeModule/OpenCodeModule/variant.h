@@ -31,8 +31,8 @@ namespace oc {
 	public:
 
 		template<typename T> T get() {
-
-			if (ti != typeid(T).name()) {
+			const char * _name = typeid(T).name();
+			if (strcmp(ti, _name) != 0) {
 				OCERROR(INVALID_PARSING_TYPE);
 				OCERRORWRITE(INVALID_PARSING_TYPE, "Invalid parsing type");
 				throw(std::runtime_error(INVALID_PARSING_TYPE));

@@ -7,8 +7,8 @@
 #include "Imodule.h"
 #include "omacro.h"
 
-typedef oc::Imodule * (__stdcall * CreateInstance)();
-typedef void(__stdcall * DeleteInstance)(oc::Imodule *);
+typedef oc::Imodule * ( * CreateInstance)();
+typedef void( * DeleteInstance)(oc::Imodule *);
 
 namespace oc {
 
