@@ -163,10 +163,8 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\..\tensorflow_c_api_1_11\tf_utils.cpp" />
     <ClCompile Include="exporter.cpp" />
     <ClCompile Include="module.cpp" />
-    <ClCompile Include="tensorflow_cpp_wrapper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tensorflow_c_api_1_11\c_api.h" />
@@ -175,7 +173,6 @@
     <ClInclude Include="module.h" />
     <ClInclude Include="oloader.h" />
     <ClInclude Include="omacro.h" />
-    <ClInclude Include="tensorflow_cpp_wrapper.hpp" />
     <ClInclude Include="variant.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

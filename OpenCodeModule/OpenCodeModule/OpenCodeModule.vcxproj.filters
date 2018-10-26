@@ -21,12 +21,6 @@
     <ClCompile Include="module.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="..\..\tensorflow_c_api_1_11\tf_utils.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
-    <ClCompile Include="tensorflow_cpp_wrapper.cpp">
-      <Filter>소스 파일</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="expoter.h">
@@ -45,9 +39,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="oloader.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="tensorflow_cpp_wrapper.hpp">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tensorflow_c_api_1_11\c_api.h">
