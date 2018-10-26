@@ -117,11 +117,16 @@ loader.dispose(input3);
 <br/>
 
 ### 예제 1 : Tensorflow C api 를 이용하여 동물 분류 모델을 로드 및  분류하는 모듈 예. 
-tensorflow c_api를 OpenCodeModule dll로 만들어 동물 사진을 분류하는 예입니다. (5가지의 종류를 분류) ***아래 동영상 참고, OpenCodeModule Visual Studio 프로젝트 참고.*** <br/>
+tensorflow c_api를 OpenCodeModule dll로 만들어 동물 사진을 분류하는 예입니다. tensorflow python을 이용하여 모델 데이터를 만든다음에 이를 로드하여 사용하는 예입니다. (5가지의 종류를 분류) ***아래 동영상 참고, OpenCodeModule Visual Studio 프로젝트 참고.*** <br/>
 
  ***주의사항 : 예제를 실행하기위해 아래의 라이브러리들이 필요*** <br/>
 <a href="https://drive.google.com/open?id=1rdVEwMDkRjl8mSaTEb2OnKrEZqVz7_EY" target="__blank">opencv 라이브러리 다운로드</a> <br/>
-<a href="https://drive.google.com/open?id=1vo4slHsubTmgeCDA1gLAs9sh-0xAz7dn" target="__blank">tensorflow c api 라이브러리 다운로드 (pre-builted gpu cuda 9.0 version)</a>
+<a href="https://drive.google.com/open?id=1vo4slHsubTmgeCDA1gLAs9sh-0xAz7dn" target="__blank">tensorflow c api 라이브러리 다운로드 (pre-builted gpu cuda 9.0 version)</a> 
+<br/>
+
+
+ ***darknet19 기반 분류기 python 코드*** <br/>
+ <a href="https://github.com/gellston/DeepLearningExamples/blob/master/models/model_darknet19.py" target="__blank">Github 소스코드</a> 
 
 ``` c++
 
