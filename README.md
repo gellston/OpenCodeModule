@@ -10,6 +10,15 @@ Graphic card : Gforce 1050ti cuda 9.0
 
 <br/>
 
+### 예제 실행에 필요한 라이브러리 
+
+ ***주의사항 : 예제를 실행하기위해 아래의 라이브러리들이 필요*** <br/>
+<a href="https://drive.google.com/open?id=1rdVEwMDkRjl8mSaTEb2OnKrEZqVz7_EY" target="__blank">opencv 라이브러리 다운로드</a> <br/>
+<a href="https://drive.google.com/open?id=1vo4slHsubTmgeCDA1gLAs9sh-0xAz7dn" target="__blank">tensorflow c api 라이브러리 다운로드 (pre-builted gpu cuda 9.0 version)</a> 
+<br/>
+
+<br/>
+
 ### OpenCodeModule 이란? 
 OpenCodeModule은 LoadLibrary 함수를 이용하여 단일 모듈(하나의 기능)을 Addon처럼 쉽게 프로그램에 붙이거나 떨어뜨릴수 있도록 설계된 Visual Studio 프로젝트입니다. 이 단일 모듈 dll은 3개의 함수 ***initialize(초기화), run(실행), dispose(자원해제)*** 로 이루어져 있으며 언급한 목적에 맞게 사용자가 함수 내부에서 코드를 작성하시면됩니다.
 
@@ -118,11 +127,6 @@ loader.dispose(input3);
 
 ### 예제 1 : Tensorflow C api 를 이용하여 동물 분류 모델을 로드 및  분류하는 모듈 예. 
 tensorflow c_api를 OpenCodeModule dll로 만들어 동물 사진을 분류하는 예입니다. tensorflow python을 이용하여 모델 데이터를 만든다음에 이를 로드하여 사용하는 예입니다. (5가지의 종류를 분류) ***아래 동영상 참고, OpenCodeModule Visual Studio 프로젝트 참고.*** <br/>
-
- ***주의사항 : 예제를 실행하기위해 아래의 라이브러리들이 필요*** <br/>
-<a href="https://drive.google.com/open?id=1rdVEwMDkRjl8mSaTEb2OnKrEZqVz7_EY" target="__blank">opencv 라이브러리 다운로드</a> <br/>
-<a href="https://drive.google.com/open?id=1vo4slHsubTmgeCDA1gLAs9sh-0xAz7dn" target="__blank">tensorflow c api 라이브러리 다운로드 (pre-builted gpu cuda 9.0 version)</a> 
-<br/>
 
 
  ***darknet19 기반 분류기 python 코드*** <br/>
