@@ -12,9 +12,11 @@ Graphic card : Gforce 1050ti cuda 9.0
 
 ### 예제 실행에 필요한 라이브러리 
 
- ***주의사항 : 예제를 실행하기위해 아래의 라이브러리들이 필요*** <br/>
+ ***주의사항 : 예제를 실행하기위해 아래의 라이브러리들이 필요합니다.*** <br/>
+ 
 <a href="https://drive.google.com/open?id=1rdVEwMDkRjl8mSaTEb2OnKrEZqVz7_EY" target="__blank">opencv 라이브러리 다운로드</a> <br/>
 <a href="https://drive.google.com/open?id=1vo4slHsubTmgeCDA1gLAs9sh-0xAz7dn" target="__blank">tensorflow c api 라이브러리 다운로드 (pre-builted gpu cuda 9.0 version)</a> 
+
 <br/>
 
 <br/>
@@ -125,12 +127,16 @@ loader.dispose(input3);
 
 <br/>
 
-### 예제 1 : Tensorflow C api 를 이용하여 동물 분류 모델을 로드 및  분류하는 모듈 예. 
-tensorflow c_api를 OpenCodeModule dll로 만들어 동물 사진을 분류하는 예입니다. tensorflow python을 이용하여 모델 데이터를 만든다음에 이를 로드하여 사용하는 예입니다. (5가지의 종류를 분류) ***아래 동영상 참고, OpenCodeModule Visual Studio 프로젝트 참고.*** <br/>
+### 예제 1 : Tensorflow C api를 이용한 동물 분류
+tensorflow c_api를 OpenCodeModule dll로 만들어 동물 사진을 분류하는 예입니다. tensorflow python을 이용하여 모델 데이터를 만든다음에 이를 로드하여 사용하는 예입니다. (5가지의 종류를 분류) <br/>
 
 
- ***darknet19 기반 분류기 python 코드*** <br/>
+***darknet19 기반 모델 python 코드*** <br/>
  <a href="https://github.com/gellston/DeepLearningExamples/blob/master/models/model_darknet19.py" target="__blank">Github 소스코드</a> 
+ 
+***예제 실행을 위해 /models/animal-darknet19-compress.pb 학습된 모델 파일 필요*** <br/>
+***예제 실행을 위해 dll 컴파일 혹은 미리 컴파일 된 /dll/animal-darknet19-compress.dll 파일 필요*** <br/>
+
 
 ``` c++
 
@@ -187,5 +193,133 @@ int main()
 <center>
 
 [![IMAGE ALT TEXT HERE](https://github.com/gellston/OpenCodeModule/blob/master/preview/preview1.png?raw=true)](https://www.youtube.com/watch?v=8uM_vKebD6Q)
- darknet19 네트워크로 트레이닝된 모델 animal-darknet19.pb를 로드하여 실행하는 모습
+ -실행화면-
  </center>
+
+
+<br/>
+
+### 예제 2 : Tensorflow C api를 Portrait Segmentation
+tensorflow c_api를 OpenCodeModule dll로 만들어 사람의 상반신 부분을 segmentaion하는 예제입니다. <br/>
+
+
+ ***densenet 기반 모델 python 코드*** <br/>
+ <a href="https://github.com/gellston/DeepLearningExamples/blob/master/models/model_custom_densenet_segmentation_v1.py" target="__blank">Github 소스코드</a> 
+ 
+  ***예제 실행을 위해 /models/densenet_segmentation-compress.pb 학습된 모델 파일 필요*** <br/>
+  ***예제 실행을 위해 dll 컴파일 혹은 미리 컴파일 된 /dll/densenet_segmentation_segmentation-compress.dll 파일 필요*** <br/>
+
+
+``` c++
+
+#include <opencv2/opencv.hpp>
+#include <oloader.h>
+
+#include <string>
+#include <Windows.h>
+
+std::vector<std::string> get_all_files_names_within_folder(std::string folder)
+{
+	std::vector<std::string> names;
+	std::string search_path = folder + "//*.jpg";
+	WIN32_FIND_DATAA fd;
+	
+	HANDLE hFind = ::FindFirstFileA(search_path.c_str(), &fd);
+
+	if (hFind != INVALID_HANDLE_VALUE) {
+		do {
+			// read all (real) files in current folder
+			// , delete '!' read other 2 default folder . and ..
+			if (!(fd.dwFileAttributes & FILE_ATTRIBUTE_DIRECTORY)) {
+				names.push_back(fd.cFileName);
+			}
+		} while (::FindNextFileA(hFind, &fd));
+		::FindClose(hFind);
+	}
+	return names;
+}
+
+int main()
+{
+
+	oc::oloader person_segmentation;
+	person_segmentation.load(L"densenet_segmentation-compress.dll", oc::oloader::MODULE_TYPE::__DLL); /// 모델을 로드할수있는 dll 
+
+
+	cv::Mat image = cv::imread("D:\\OpenCodeModule\\ConsoleExample\\x64\\Release\\images\\00001.jpg");  /// 이미지 경로.
+	cv::Mat convert;
+	image.convertTo(convert, CV_32F);
+	
+
+
+	oc::variant initParam;
+	initParam << (const char *)"D:\\OpenCodeModule\\ConsoleExample\\x64\\Release\\densenet_segmentation-compress.pb";  /// 모델 경로.
+	initParam << convert.cols;  // 이미지 너비
+	initParam << convert.rows;  // 이미지 높이
+	initParam << 3;             // 이미지 채널
+
+	try {
+		oc::variant init_output = person_segmentation.initialize(initParam);
+
+	}
+	catch (std::runtime_error e) {
+		std::cout << e.what() << std::endl;
+	}
+
+
+	
+	std::vector<std::string> filenames = get_all_files_names_within_folder("D://OpenCodeModule//ConsoleExample//x64//Release//images");
+	std::cout << "it will start segmentation !!" << std::endl;
+	cv::waitKey();
+
+	for (int index = 0; index < filenames.size(); index++) {
+		try {
+
+			std::string filename = "D:\\OpenCodeModule\\ConsoleExample\\x64\\Release\\images\\";
+			filename += filenames[index];
+			cv::Mat image = cv::imread(filename.c_str());  /// 이미지 경로.
+			cv::Mat convert;
+			image.convertTo(convert, CV_32F);
+			cv::Mat output(256, 256, CV_32F, cv::Scalar(0, 0, 0));
+
+			cv::Mat resize_input(512, 512, CV_32F, cv::Scalar(0, 0, 0));
+			cv::Mat resize_output(512, 512, CV_32F, cv::Scalar(0, 0, 0));
+
+			oc::variant imageParam;
+			bool phase = false;
+			imageParam << (float *)convert.data;   /// image pointer
+			imageParam << (float *)output.data;
+			imageParam << phase;                  /// Batch normalization turn off
+			oc::variant run_output = person_segmentation.run(imageParam);
+			std::cout << "message : " << run_output[0].get<const char *>() << std::endl;
+
+
+			cv::resize(image, resize_input, cv::Size(512, 512), 0, 0, cv::INTER_CUBIC);
+			cv::resize(output, resize_output, cv::Size(512, 512), 0, 0, cv::INTER_CUBIC);
+			cv::Mat thres_output;
+
+			cv::threshold(resize_output, thres_output, 0.5, 255, cv::THRESH_BINARY);
+
+			cv::imshow("input image", resize_input);
+			cv::imshow("output image", resize_output);
+			cv::imshow("thres image", thres_output);
+			cv::waitKey(30);
+		}
+		catch (std::runtime_error e) {
+			std::cout << e.what() << std::endl;
+		}
+	}
+
+	cv::waitKey();
+
+	return 0;
+}
+
+```
+<center>
+
+[![IMAGE ALT TEXT HERE](https://github.com/gellston/OpenCodeModule/blob/master/preview/preview2.png?raw=true)](https://www.youtube.com/watch?v=BRWIqOLkSNw)
+ -실행화면-
+ </center>
+
+<br/>

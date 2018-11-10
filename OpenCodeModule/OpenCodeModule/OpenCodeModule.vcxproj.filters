@@ -18,7 +18,10 @@
     <ClCompile Include="exporter.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
-    <ClCompile Include="module.cpp">
+    <ClCompile Include="module_darknet19_animal_classification.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
+    <ClCompile Include="module_densenet_segmentation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
@@ -27,9 +30,6 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="variant.h">
-      <Filter>헤더 파일</Filter>
-    </ClInclude>
-    <ClInclude Include="module.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="Imodule.h">
@@ -42,6 +42,12 @@
       <Filter>헤더 파일</Filter>
     </ClInclude>
     <ClInclude Include="..\..\tensorflow_c_api_1_11\c_api.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="module_darknet19_animal_classification.h">
+      <Filter>헤더 파일</Filter>
+    </ClInclude>
+    <ClInclude Include="module_densenet_segmentation.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

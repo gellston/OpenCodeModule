@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleExample-darknet19-animal.cpp">
+    <ClCompile Include="ConsoleExample-densenet_segmentation_segmentation.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>
