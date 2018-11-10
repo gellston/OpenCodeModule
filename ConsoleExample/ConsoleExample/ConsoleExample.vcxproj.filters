@@ -15,7 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ConsoleExample-densenet_segmentation_segmentation.cpp">
+    <ClCompile Include="ConsoleExample-mobile_segmentation_v3.cpp">
       <Filter>소스 파일</Filter>
     </ClCompile>
   </ItemGroup>

@@ -166,6 +166,7 @@
     <ClCompile Include="exporter.cpp" />
     <ClCompile Include="module_darknet19_animal_classification.cpp" />
     <ClCompile Include="module_densenet_segmentation.cpp" />
+    <ClCompile Include="module_mobile_segmentation_v3.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\..\tensorflow_c_api_1_11\c_api.h" />
@@ -173,6 +174,7 @@
     <ClInclude Include="Imodule.h" />
     <ClInclude Include="module_darknet19_animal_classification.h" />
     <ClInclude Include="module_densenet_segmentation.h" />
+    <ClInclude Include="module_mobile_segmentation_v3.h" />
     <ClInclude Include="oloader.h" />
     <ClInclude Include="omacro.h" />
     <ClInclude Include="variant.h" />

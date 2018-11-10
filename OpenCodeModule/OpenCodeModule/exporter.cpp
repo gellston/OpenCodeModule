@@ -1,9 +1,8 @@
 #include "expoter.h"
-#include "module_darknet19_animal_classification.h"
-
+#include "module_mobile_segmentation_v3.h"
 
 extern "C" __declspec(dllexport) oc::Imodule * CreateInstance() {
-	oc::Imodule * module = (oc::Imodule *)new oc::omodule_darknet19_animal_classification();
+	oc::Imodule * module = (oc::Imodule *)new oc::omodule_mobile_segmentation_v3();
 	return module;
 }
 
@@ -12,7 +11,7 @@ extern "C" __declspec(dllexport) oc::Imodule * CreateInstance() {
 extern "C" __declspec(dllexport) void DeleteInstance(oc::Imodule * _instance) {
 
 	if (_instance != nullptr) {
-		oc::omodule_darknet19_animal_classification * module = (oc::omodule_darknet19_animal_classification *)_instance;
+		oc::omodule_mobile_segmentation_v3 * module = (oc::omodule_mobile_segmentation_v3 *)_instance;
 		delete module;
 	}
 
